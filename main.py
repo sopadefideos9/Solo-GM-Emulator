@@ -200,6 +200,12 @@ fate_chart = {
     "Casi seguro":     {1: 72, 2: 76, 3: 80, 4: 85, 5: 90, 6: 92, 7: 94, 8: 96, 9: 98},
     "Seguro":          {1: 91, 2: 92, 3: 93, 4: 94, 5: 95, 6: 96, 7: 97, 8: 98, 9: 99}
 }
+def change_chaos():
+    print("Choose the new chaos factor value from 1 to 10")
+    respuesta = input()
+    global chaos_factor
+    chaos_factor = respuesta
+    print(f"Chaos factor updated to: {chaos_factor}")
 def oraculo():
         print(f"""
     ===Oraculo===\n
@@ -215,35 +221,37 @@ def oraculo():
     9. Seguro""")
         respuesta  = input()
         niveles = ["Imposible", "Casi imposible", "Muy improbable", "Improbable", "50/50", "Probable", "Muy probable", "Casi seguro", "Seguro"]
-        nivel = niveles[int(respuesta) - 1]
-        
-        umbral = fate_chart[nivel][chaos_factor]
-        numero = random.randint(1, 100)
-        print(f"""
-            Numero: {numero}\n
-            Umbral:{umbral}""")
-        if numero <= umbral and numero in range(11,100,11):
-            print("Si excepcional")
-            if (numero // 10) <= chaos_factor:
-                evento_aleatorio()
-            return
-        elif numero > umbral and numero in range(11,100,11):
-            print("No excepcional")
-            if (numero // 10) <= chaos_factor:
-                evento_aleatorio()
-            return
-        elif numero <= umbral:
-            print("Si")
-            return
-        else:
-            print("No")
-            return
+        try:
+            nivel = niveles[int(respuesta) - 1]
+            
+            umbral = fate_chart[nivel][chaos_factor]
+            numero = random.randint(1, 100)
+            print(f"""
+                Numero: {numero}\n
+                Umbral:{umbral}""")
+            if numero <= umbral and numero in range(11,100,11):
+                print("Si excepcional")
+                if (numero // 10) <= chaos_factor:
+                    evento_aleatorio()
+                return
+            elif numero > umbral and numero in range(11,100,11):
+                print("No excepcional")
+                if (numero // 10) <= chaos_factor:
+                    evento_aleatorio()
+                return
+            elif numero <= umbral:
+                print("Si")
+                return
+            else:
+                print("No")
+                return
+        except IndexError:
+            print("Elige una posibilidad valida. 1 al 9")
         
 
 def evento_aleatorio():
         numero = random.randint(1,100)
-        evento = (numero - 1) // 5
-        print(numero)
+        evento = (numero - 1) // 51
         print(categorias[evento])
         print("""Elige 1 o 2 listas separado por espacios:\n
         1: action_1,\n
@@ -278,14 +286,16 @@ def main():
     print(f"""===Chaos Factor: {chaos_factor} ===\n
     1. Preguntar al Oraculo\n
     2. Generar Evento Aleatorio\n
-    3. Salir""")
+    3. Cambiar Chaos Factor\n
+    4. Salir""")
     respuesta = input()
-    if respuesta == "3":
+    if respuesta == "4":
         return exit()
     if respuesta == "1":
          print(oraculo())
     if respuesta == "2":
         print(evento_aleatorio())
-
+    if respuesta == "3":
+        change_chaos()
 main()
 #"Este proyecto usa contenido de Mythic Game Master Emulator Second Edition, de Tana Pigeon, publicado por Word Mill Games, y licenciado bajo Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). Más información en www.wordmillgames.com."
