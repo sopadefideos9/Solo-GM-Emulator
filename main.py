@@ -215,8 +215,7 @@ def oraculo():
     9. Seguro""")
         respuesta  = input()
         niveles = ["Imposible", "Casi imposible", "Muy improbable", "Improbable", "50/50", "Probable", "Muy probable", "Casi seguro", "Seguro"]
-        try:
-            nivel = niveles[int(respuesta) - 1]
+        nivel = niveles[int(respuesta) - 1]
         
         umbral = fate_chart[nivel][chaos_factor]
         numero = random.randint(1, 100)
