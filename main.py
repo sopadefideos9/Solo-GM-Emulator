@@ -140,7 +140,7 @@ characters = [
     "Anxious", "Armed", "Beautiful", "Bold", "Busy",
     "Calm", "Careless", "Casual", "Cautious", "Classy",
     "Colorful", "Combative", "Crazy", "Creepy", "Curious",
-    "Dangerous", "Deceitful", "Delightful", "Defeated", "Delightful",
+    "Dangerous", "Deceitful", "Defeated", "Delightful",
     "Emotional", "Energetic", "Equipped", "Excited", "Expected",
     "Familiar", "Fast", "Feeble", "Feminine", "Ferocious",
     "Foe", "Foolish", "Fortunate", "Fragrant", "Frantic",
@@ -173,7 +173,7 @@ objects = [
     "Liquid", "Loud", "Majestic", "Meaningful", "Mechanical",
     "Modern", "Moving", "Multiple", "Mundane", "Mysterious",
     "Natural", "New", "Odd", "Official", "Old",
-    "Ornamental", "Ornamental", "Personal", "Powerful", "Priced",
+    "Ornamental", "Personal", "Powerful", "Priced",
     "Protection", "Rare", "Ready", "Reassuring", "Resource",
     "Ruined", "Small", "Soft", "Solitary", "Stolen",
     "Strange", "Stylish", "Threatening", "Tool", "Travel",
@@ -202,7 +202,7 @@ fate_chart = {
 }
 def change_chaos():
     print("Choose the new chaos factor value from 1 to 10")
-    respuesta = input()
+    respuesta = int(input())
     global chaos_factor
     chaos_factor = respuesta
     print(f"Chaos factor updated to: {chaos_factor}")
@@ -251,7 +251,7 @@ def oraculo():
 
 def evento_aleatorio():
         numero = random.randint(1,100)
-        evento = (numero - 1) // 51
+        evento = (numero - 1) // 5
         print(categorias[evento])
         print("""Elige 1 o 2 listas separado por espacios:\n
         1: action_1,\n
@@ -292,9 +292,9 @@ def main():
     if respuesta == "4":
         return exit()
     if respuesta == "1":
-         print(oraculo())
+         oraculo())
     if respuesta == "2":
-        print(evento_aleatorio())
+        evento_aleatorio()
     if respuesta == "3":
         change_chaos()
 main()
